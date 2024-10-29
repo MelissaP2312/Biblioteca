@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Vista Principal</title>
-        <link rel="stylesheet" href="../public/css/estiloVR.css">
+        <link rel="stylesheet" href="../css/estiloVR.css">
     </head>
     <body>
         <div class="header">
@@ -26,7 +26,7 @@
             <div class="footer-date-time" id="dateTime"></div>
         </div>
 
-        <script src="../public/js/scriptfooterHorayFecha.js"></script> 
+        <script src="../js/scriptfooterHorayFecha.js"></script> 
 
     </body>
 </html>

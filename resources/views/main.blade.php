@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biblioteca</title>
-    <link rel="stylesheet" href="../public/css/Libreria.css">
+    <link rel="stylesheet" href="../css/Libreria.css">
 </head>
 <body>
     <h1>Librería</h1>
@@ -37,6 +37,6 @@
         </div>
     </div>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="../public/js/main.js"></script>
+    <script src="../js/main.js"></script>
 </body>
 </html>

@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Auth\RegisterController;
+
+Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+Route::get('/register', [RegisterController::class, 'create'])->name('register');
+
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
@@ -13,24 +18,26 @@ Route::get('/foros', function () {
     return view('Foros');
 });
 
-Route::get('login', function () {
+Route::get('/login', function () {
     return view('login');
 });
 
-Route::get('registro', function () {
+Route::get('/registro', function () {
     return view('VR2');
 });
 
-Route::get('registro/libros', function () {
+Route::get('/registro/libros', function () {
     return view('RegistroLibros');
 });
 
-Route::get('registro/material', function () {
+Route::get('/registro/material', function () {
     return view('RegistroMaterial');
 });
 
-Route::get('registro/aulas', function () {
+Route::get('/registro/aulas', function () {
     return view('RegistroAulas');
 });
 
-
+Route::get('contraseña', function () {
+    return view('recuperaContraseña');
+});

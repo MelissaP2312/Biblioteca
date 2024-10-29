@@ -10,7 +10,7 @@
     <meta name="keywords" content="unique login form,leamug login form,boostrap login form,responsive login form,free css html login form,download login form">
     <meta name="author" content="leamug">
     <title>Login</title>
-    <link href="../public/css/styles.css" rel="stylesheet" id="style">
+    <link href="../css/styles.css" rel="stylesheet" id="style">
     <!-- Bootstrap -->
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -25,37 +25,30 @@
 
 
 <!-- Contenedor Vista Iniciar Sesión-->
-<div id="login-container" class="container" style="display: block;">
+<div id="login-container" class="container">
     <div class="row justify-content-center">
         <div class="col-md-4 text-center">
             <div class="form-login"></br>
                 <h1>Iniciar sesión</h1>
                 </br>
-                @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-
                 <!-- Formulario de inicio de sesión -->
-                <form action="{{ route('login') }}" method="POST">
-                    @csrf <!-- Asegúrate de incluir el token CSRF -->
-                    <input type="text" name="correo" id="userName" class="form-control input-sm chat-input" placeholder="Correo electrónico" required/>
+                <form action="{{route('login')}}" method="POST">
+                    @csrf
+                    <input type="text" name="email" id="userName" class="form-control input-sm chat-input" placeholder="Correo electrónico" required/>
                     <br>
                     <div class="input-group">
-                        <input type="password" name="contraseña" id="userPassword" class="form-control input-sm chat-input" placeholder="Contraseña" required/>
+                        <input type="password" name="password" id="userPassword" class="form-control input-sm chat-input" placeholder="Contraseña" required/>
                         <span class="input-group-text" id="togglePassword" style="cursor:pointer;">
                             <i class="fas fa-eye"></i>
                         </span>
                     </div>
                     <br>
+                    <a class="link" href="{{route('contraseña')}}" id="contraseña-forgotten">¿Olvidaste tu contraseña?</a>
+                    <br>
+                    <br>
                     <div class="wrapper">
                         <span class="group-btn">
-                            <a class="btn btn-danger btn-md" id="registerButton">Registrar</a>
+                            <a class="btn btn-danger btn-md" id="registerButton" href="{{ route('register') }}">Registrar</a>
                             <button type="submit" class="btn btn-danger btn-md">Login</button>
                         </span>
                     </div>
@@ -73,67 +66,7 @@
     </div>
 </div>
 
-
-<!-- Contenedor Vista Registro-->
-<div id="register-container" class="container" style="display: none;">
-    <div class="row justify-content-center">
-        <div class="col-md-4 text-center">
-            <div class="form-login"></br>
-                <h1>Crear cuenta</h1>
-                <form action="../php/register.php" method="post">
-                    <div class="form-group">
-                        <label for="name">Ingresa tu nombre:</label>
-                        <input type="text" name="name" id="name" class="form-control" placeholder="Nombres" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="age">Ingresa tu edad:</label>
-                        <input type="number" name="age" id="age" class="form-control" placeholder="Edad" min="1" max="120" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Selecciona tu género:</label><br>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="gender" id="male" value="Masculino" required>
-                            <label class="form-check-label" for="male">Masculino</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="gender" id="female" value="Femenino" required>
-                            <label class="form-check-label" for="female">Femenino</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="gender" id="other" value="Otro" required>
-                            <label class="form-check-label" for="other">Otro</label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Ingresa tu teléfono:</label>
-                        <input type="text" name="phone" id="phone" class="form-control" placeholder="Teléfono" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Ingresa tu correo electrónico:</label>
-                        <input type="email" name="email" id="email" class="form-control" placeholder="Correo" required>
-                        <small id="emailHelp" class="form-text text-muted" style="color:red;"></small>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Ingresa tu contraseña:</label>
-                        <input type="password" name="password" id="password" class="form-control" placeholder="Contraseña" required>
-                    </div>                  
-                    <div class="form-group">
-                        <label for="password-confirm">Verifica tu contraseña:</label>
-                        <input type="password" name="password-confirm" id="password-confirm" class="form-control" placeholder="Verifica la contraseña" required>
-                    </div>
-                    <br/>
-                    <div class="wrapper">
-                        <span class="group-btn">
-                            <button type="submit" class="btn btn-danger btn-md" id="registerBtn">Registrar</button>
-                            <button type="submit" class="btn btn-danger btn-md" id="iniciarBtn">Login</button>
-                        </span>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<script src="../public/js/script.js"></script>
+<script src="../js/script.js"></script>
 <script>
     window.fbAsyncInit = function() {
       FB.init({

@@ -1,14 +1,4 @@
 $(document).ready(function() {
-    const passwordField = document.getElementById("userPassword");
-    const togglePassword = document.getElementById("togglePassword");
-    const icon = togglePassword.querySelector("i");
-
-    togglePassword.addEventListener("click", function() {
-        const type = passwordField.type === "password" ? "text" : "password";
-        passwordField.type = type;
-        icon.classList.toggle("fa-eye");
-        icon.classList.toggle("fa-eye-slash");
-    });
     
     $('#password, #password-confirm').on('keyup', function() {
         validatePasswordStrength();
