@@ -23,6 +23,18 @@
 </head>
 <body>
 
+    @if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
 
 <!-- Contenedor Vista Iniciar Sesión-->
 <div id="login-container" class="container">
@@ -43,7 +55,7 @@
                         </span>
                     </div>
                     <br>
-                    <a class="link" href="{{route('contraseña')}}" id="contraseña-forgotten">¿Olvidaste tu contraseña?</a>
+                    <a class="link" href="" id="contraseña-forgotten">¿Olvidaste tu contraseña?</a>
                     <br>
                     <br>
                     <div class="wrapper">
