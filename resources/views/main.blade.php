@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca</title>
+    <link rel="stylesheet" href="../public/css/Libreria.css">
+</head>
+<body>
+    <h1>Librería</h1>
+    <nav>
+        <ul class="opciones">
+            <li>Filtros</li>
+            <li>Membresía</li>
+            <li>Renta</li>
+            <li><a href="{{ url('/foros') }}">Foros</a></li>
+        </ul>
+    </nav>
+    <div id="contenedor-principal">
+        <div id="libros">
+            <div id="loading"></div>
+            </div>
+        </div>
+            </div>
+            
+        </div>
+        <div id="rankings">
+            <div class="contenedorrank" id="rankings-title">
+                <h4>Rankings</h4>
+                <p>Libros más leídos</p>
+                <p>Libros más valorados</p>
+                <p>Libros más rentados</p>
+            </div>
+        </div>
+        <div id="footer">
+            <p>Copyright SoftLibrary © . All rights reserved.
+        </div>
+    </div>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="../public/js/main.js"></script>
+</body>
+</html>
