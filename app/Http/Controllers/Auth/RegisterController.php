@@ -39,9 +39,9 @@ class RegisterController extends Controller
 
         // Redirigir a una página de éxito o al login
         return redirect()->route('login')->with('success', 'Registro exitoso');
-    }catch (\Exception $e) {
-        // Redirigir de nuevo al registro con un mensaje de error
-        return redirect()->route('register')->with('error', 'Error al registrar el usuario: ' . $e->getMessage());
+        }catch (\Exception $e) {
+            // Redirigir de nuevo al registro con un mensaje de error
+            return redirect()->route('register')->with('error', 'Error al registrar el usuario: ' . $e->getMessage());
+        }
     }
-}
 }
