@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Estructura del contenido de la tarjeta
         contenedorLibro.innerHTML = `
-            <h4 id="nombre-libro">${libro.titulo}</h4>
+            <h4 id="nombre-libro">${libro.nombre}</h4>
             <img src="${libro.imagen}" alt="Portada libro" />
             <p>Autor</p>
             <p id="autor">${libro.autor}</p>
