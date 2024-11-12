@@ -10,13 +10,15 @@
     <div class="membership-status">
         <h1>Estado de tu Membresía</h1>
         <div class="membership-info">
-            <p><strong>ID de Persona:</strong> 987654321</p>
-            <p><strong>Nombre:</strong> Juan Pérez</p>
-            <p><strong>Número de Membresía:</strong> 123456789</p>
-            <p><strong>Nivel de Membresía:</strong> Oro</p>
-            <p><strong>Penalizaciones:</strong> Ninguna</p>
-            <p><strong>Teléfono:</strong> +34 123 456 789</p>
+            <p><strong>ID de Persona:</strong> <span id="personaId">Cargando...</span></p>
+            <p><strong>Nombre:</strong> <span id="nombre">Cargando...</span></p>
+            <p><strong>Número de Membresía:</strong> <span id="numeroMembresia">Cargando...</span></p>
+            <p><strong>Nivel de Membresía:</strong> <span id="nivelMembresia">Cargando...</span></p>
+            <p><strong>Penalizaciones:</strong> <span id="penalizaciones">Cargando...</span></p>
+            <p><strong>Teléfono:</strong> <span id="telefono">Cargando...</span></p>
         </div>
     </div>
+    <script src="../js/membresias.js"></script>
 </body>
-</html></div>
+</html>
+
