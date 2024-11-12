@@ -1,0 +1,37 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #b6694b;
+    margin: 0;
+    padding: 20px;
+}
+
+.membership-status {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    border: #000000 1px solid;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.93);
+    text-align: center;
+}
+
+.membership-status h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.membership-info {
+    text-align: left;
+}
+
+.membership-info p {
+    font-size: 18px;
+    color: #333;
+    margin: 10px 0;
+}
+
+.membership-info strong {
+    color: #007bff;
+}
