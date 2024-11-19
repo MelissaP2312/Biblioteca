@@ -1,5 +1,13 @@
 body{
+           
+           
     background-color: #d99f76;
+}
+
+a {
+    display: block; /* Hace que el enlace ocupe todo el bloque del li */
+    text-decoration: none; /* Elimina el subrayado del enlace */
+    color: black; /* Cambia el color del texto */
 }
 
 h1{
@@ -105,41 +113,39 @@ h1{
 .opciones {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between; /* Distribuye uniformemente el espacio entre las opciones */
     list-style: none;
-    flex-wrap: wrap; /* Permite que los elementos se ajusten en varias líneas si es necesario */
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+    padding: 0;
+    margin: 0;
 }
 
 .opciones li {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    display: inline-block;
-    padding: 10px 5vw; /* Ajusta el padding para que los elementos se ajusten en varias páginas */
-    margin: 5px;
+    padding: 10px 0;
     color: white;
     background: #60a2c6;
-    border-radius: 30px;
     cursor: pointer;
     transition: background 0.7s ease;
+    width: 25%; /* Cada opción ocupa el 25% del ancho */
+    text-align: center; /* Centra el texto dentro de cada opción */
 }
 
-@media (max-width: 768px) {
-    .opciones li {
-        padding: 10px 3vw; /* Reducir aún más el padding en pantallas más pequeñas */
-        width: 30%; /* Para que los elementos ocupen aproximadamente la mitad del ancho */
-    }
-}
-
-@media (max-width: 480px) {
-    .opciones li {
-        width: 100%; /* En pantallas muy pequeñas, que los elementos ocupen el 100% del ancho */
-        padding: 10px 2vw; /* Reducir el padding al mínimo */
-    }
-}
-
-
-.opciones li:hover{
+.opciones li:hover {
     background: #badcd5; /* Cambia el color de fondo al pasar el ratón */
 }
+
+
+@media (max-width: 500px) {
+    .opciones {
+        flex-direction: column; /* En pantallas muy pequeñas, las opciones se apilan verticalmente */
+    }
+    .opciones li {
+        width: 100%; /* Cada opción ocupa el 100% del ancho */
+    }
+}
+
+
 
 #loading {
     display: none;

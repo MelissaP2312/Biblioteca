@@ -20,8 +20,8 @@
         </ul>
     </div>
 
-    <script>
-        
-    </script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="../js/Foros.js"></script>
+    
 </body>
 </html>
