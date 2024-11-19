@@ -22,10 +22,17 @@ class AulaController extends Controller
             'capacidad' => 'required|integer|min:1',
             'ubicacion' => 'required|string|max:255',
         ]);
-
-        // Crear un nuevo registro en la base de datos
-        Aula::create($request->all());
-
+    
+        // Crear un nuevo registro en la base de datos (sin necesidad de enviar 'disponible' ya que es predeterminado)
+        Aula::create([
+            'nombre_aula' => $request->nombre_aula,
+            'capacidad' => $request->capacidad,
+            'ubicacion' => $request->ubicacion,
+            // 'disponible' no se necesita incluir aquí ya que tiene un valor predeterminado de 1
+        ]);
+    
         return redirect()->route('aula.create')->with('success', 'Aula registrada con éxito.');
     }
+    
+    
 }

@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Registrar Aulas</h1>
-    <form action="{{ route('aula.store') }}" method="POST">
+    <form action="{{ route('aula.create') }}" method="POST">
         @csrf <!-- Token de seguridad obligatorio -->
         <div>
             <label for="nombre_aula">Nombre del Aula:</label>
@@ -21,6 +21,10 @@
         <div>
             <label for="ubicacion">Ubicación:</label>
             <input type="text" name="ubicacion" id="ubicacion" required>
+        </div>
+        <div>
+            <label for="disponible">Disponible:</label>
+            <input type="checkbox" name="disponible" id="disponible" checked disabled> <!-- Deshabilitado porque siempre será 'disponible' -->
         </div>
         <button type="submit">Registrar Aula</button>
 

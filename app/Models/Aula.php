@@ -17,5 +17,6 @@ class Aula extends Model
         'nombre_aula',
         'capacidad',
         'ubicacion',
+        'disponible'
     ];
 }
