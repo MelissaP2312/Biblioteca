@@ -55,7 +55,7 @@ class LibroController extends Controller
         ]);
 
         // Redirigir al formulario de registro de libros con un mensaje de éxito
-        return redirect()->route('libros.registro')->with('success', 'Libro registrado con ¡ÉXITO!');
+        return redirect()->route('libros.create')->with('success', 'Libro registrado con ¡ÉXITO!');
     }
 
     public function checkIsbn(Request $request)

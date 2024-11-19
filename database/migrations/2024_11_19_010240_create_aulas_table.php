@@ -16,6 +16,7 @@ return new class extends Migration
         $table->string('nombre_aula');        // nombre_aula VARCHAR(100) NOT NULL
         $table->integer('capacidad');         // capacidad INT NOT NULL
         $table->string('ubicacion');          // ubicacion VARCHAR(255) NOT NULL
+        $table->boolean('disponible')->default(true); // disponible TINYINT(1) NOT NULL DEFAULT 1
         $table->timestamps();                 // created_at y updated_at
     });
 }

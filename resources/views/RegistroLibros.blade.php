@@ -42,7 +42,7 @@
     <h1>Registrar un Libro</h1>
 
     <div class="form-container">
-        <form id="formLibro" action="{{ route('libros.store') }}" method="post" enctype="multipart/form-data">
+        <form id="formLibro" action="{{ route('libros.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <label for="nombre">Nombre del Libro:</label>
             <input type="text" id="nombre" name="nombre" required value="{{ old('nombre') }}">
