@@ -9,6 +9,19 @@
 <body>
     <h1>Rentar un Aula</h1>
 
+    <!-- Mostrar mensajes de error o éxito -->
+    @if (session('error'))
+        <div class="alert alert-error" style="color: red;">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    @if (session('success'))
+        <div class="alert alert-success" style="color: green;">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <div class="form-container">
         <form id="formLibro" action="{{ route('rentas_aulas.store') }}" method="post">
             @csrf
@@ -31,9 +44,11 @@
             <label for="fecha_prestamo">Fecha de préstamo:</label>
             <input type="date" id="fecha_prestamo" name="fecha_prestamo" required value="{{ old('fecha_prestamo') }}">
 
-            <label for="unidades_disponibles">Unidades disponibles:</label>
-            <input type="number" id="unidades_disponibles" name="unidades_disponibles" required value="{{ old('unidades_disponibles') }}">
+            <label for="hora_inicio">Hora de inicio:</label>
+            <input type="time" id="hora_inicio" name="hora_inicio" required value="{{ old('hora_inicio') }}">
 
+            <label for="hora_fin">Hora de fin:</label>
+            <input type="time" id="hora_fin" name="hora_fin" required value="{{ old('hora_fin') }}">
 
             <div class="button-container">
                 <button type="submit" id="saveButton">Guardar</button>
@@ -47,7 +62,7 @@
         <a href="{{ url('/admin/rentas') }}" class="btn-regresar">Regresar al Administrador</a>
     </div>
 
-    <script src="{{ asset('js/scriptregistrolibro.js') }}"></script>
+    <script src="{{ asset('js/scriptrentas.js') }}"></script>
     <script src="{{ asset('js/GuardadoyLimpiar.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>

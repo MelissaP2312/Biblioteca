@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ asset('css/estiloslibrosregistro.css') }}">
-    <title>Renta de Libros</title>
+    <title>Renta de Materiales</title>
 </head>
 <body>
     <h1>Rentar un Material</h1>
 
     <div class="form-container">
-        <form id="formLibro" action="{{ route('rentas_materiales.store') }}" method="post">
+        <form id="formMaterial" action="{{ route('rentas_materiales.store') }}" method="post">
             @csrf
-            <label for="nombre_libro">Nombre del Libro:</label>
-            <select id="nombre_libro" name="nombre_libro" required>
-                <option value="">Seleccionar un libro</option>
-                @foreach ($libros as $libro)
-                    <option value="{{ $libro->nombre }}">{{ $libro->nombre }}</option>
+            <label for="nombre_material">Nombre del Material:</label>
+            <select id="nombre_material" name="nombre_material" required>
+                <option value="">Seleccionar un material</option>
+                @foreach ($materiales as $material)
+                    <option value="{{ $material->tipo }}">{{ $material->tipo }}</option>
                 @endforeach
             </select>
             

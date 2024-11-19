@@ -14,10 +14,11 @@
             <div class="info-container">
                 <div class="buttons">
                     <a href="{{ url('admin/rentas/libros')}}" class="button">Libros</a>
-                    <a href="{{ url('admin/rentas/material')}}" class="button">Material</a>
+                    <a href="{{ url('admin/rentas/materiales')}}" class="button">Material</a>
                     <a href="{{ url('admin/rentas/aulas')}}" class="button">Aulas</a>
                 </div>
             </div>
+            <a href="{{ url('admin')}}">Regresar al Administrador</a>
         </div>
         <div class="footer">
             <div class="footer-info">

@@ -8,6 +8,7 @@ use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\AulaController;
 use App\Http\Controllers\RentaLibroController;
 use App\Http\Controllers\RentaAulaController;
+use App\Http\Controllers\RentaMaterialController;
 
 // Rutas para registro aulas
 Route::get('/admin/registro/aulas', [AulaController::class, 'create'])->name('aula.create'); 
@@ -29,9 +30,15 @@ Route::post('/admin/registro/material', [MaterialController::class, 'store'])->n
 Route::get('/admin/rentas/libros', [RentaLibroController::class, 'create'])->name('rentas_libros.create');
 Route::post('/admin/rentas/libros', [RentaLibroController::class, 'store'])->name('rentas_libros.store');
 
+// Rutas para renta de materiales
+Route::get('/admin/rentas/materiales', [RentaMaterialController::class, 'create'])->name('rentas_materiales.create');
+Route::post('/admin/rentas/materiales', [RentaMaterialController::class, 'store'])->name('rentas_materiales.store');
+
 // Rutas para renta de aula
 Route::get('/admin/rentas/aulas', [RentaAulaController::class, 'create'])->name('rentas_aulas.create');
 Route::post('/admin/rentas/aulas', [RentaAulaController::class, 'store'])->name('rentas_aulas.store');
+Route::post('/verificar-disponibilidad', [RentasAulasController::class, 'verificarDisponibilidad']);
+
 
 // Rutas de autenticación
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');

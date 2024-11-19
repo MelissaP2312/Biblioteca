@@ -40,6 +40,7 @@ body {
     gap: 20px; /* Espacio entre los botones */
 }
 
+
 .button {
     display: inline-block;
     padding: 80px 60px; /* Tamaño más grande */
@@ -56,6 +57,7 @@ body {
     background-color: #a95a00; /* Color de fondo al pasar el mouse */
     transform: translateY(-2px); /* Levanta el botón al pasar el mouse */
 }
+
 
 .footer {
     background-color: #f7e5af; /* Color de fondo */

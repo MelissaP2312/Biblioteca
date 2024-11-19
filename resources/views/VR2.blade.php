@@ -18,6 +18,7 @@
                     <a href="{{ url('admin/registro/aulas')}}" class="button">Aulas</a>
                 </div>
             </div>
+            <a href="{{ url('admin')}}">Regresar al Administrador</a>
         </div>
         <div class="footer">
             <div class="footer-info">
