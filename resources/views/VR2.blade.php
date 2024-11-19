@@ -13,9 +13,9 @@
         <div class="container">
             <div class="info-container">
                 <div class="buttons">
-                    <a href="{{ url('/registro/libros')}}" class="button">Libros</a>
-                    <a href="{{ url('/registro/material')}}" class="button">Material</a>
-                    <a href="{{ url('/registro/aulas')}}" class="button">Aulas</a>
+                    <a href="{{ url('admin/registro/libros')}}" class="button">Libros</a>
+                    <a href="{{ url('admin/registro/material')}}" class="button">Material</a>
+                    <a href="{{ url('admin/registro/aulas')}}" class="button">Aulas</a>
                 </div>
             </div>
         </div>

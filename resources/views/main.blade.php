@@ -15,6 +15,7 @@
             <li>Renta</li>
             <li><a href="{{ url('/foros') }}">Foros</a></li>
         </ul>
+        <a class="btn btn-danger btn-md" href="{{ route('login') }}">Iniciar sesión</a>
     </nav>
     <div id="contenedor-principal">
         <div id="libros">

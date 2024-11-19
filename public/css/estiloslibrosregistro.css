@@ -13,7 +13,24 @@ h1 {
 
 .form-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    margin-top: 40px;
+}
+
+.form-left {
+    flex: 3; /* Ocupa el 70% */
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-right {
+    flex: 1; /* Ocupa el 30% */
+    margin-left: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .image-preview {
@@ -32,14 +49,6 @@ h1 {
     max-width: 100%;
     max-height: 100%;
     border-radius: 4px;
-}
-
-form {
-    flex: 2;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 label {
@@ -81,10 +90,30 @@ button:hover {
 .button-container {
     display: flex;
     justify-content: space-between;
+    margin-top: 20px;
 }
 
 input[type="file"] {
     padding: 3px;
+}
+
+/* Estilo para el botón de regresar */
+.btn-regresar {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 20px;
+    text-align: center;
+    width: 100%;
+    text-align: center;
+}
+
+.btn-regresar:hover {
+    background-color: #0056b3;
 }
 
 @media (max-width: 600px) {

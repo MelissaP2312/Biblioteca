@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Vista Principal</title>
-        <link rel="stylesheet" href="../public/css/estiloVA.css">
+        <link rel="stylesheet" href="../css/estiloVA.css">
     </head>
     <body>
         <div class="header">
@@ -13,7 +13,7 @@
         <div class="container">
             <div class="info-container">
                 <div class="buttons">
-                    <a href="VR2.html" class="button">Registro</a>
+                    <a href="{{ url('admin/registro') }}" class="button">Registro</a>
                     <a href="" class="button">Rentas</a>
                     <a href="" class="button">Foros</a>
                 </div>
@@ -27,7 +27,7 @@
             <div class="footer-date-time" id="dateTime"></div>
         </div>
 
-        <script src="../public/js/scriptfooterHorayFecha.js"></script> <!-- Carga el script aquí -->
+        <script src="../js/scriptfooterHorayFecha.js"></script> <!-- Carga el script aquí -->
 
     </body>
 </html>

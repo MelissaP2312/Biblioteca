@@ -3,31 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/estilosaulasregistro.css">
+    <link rel="stylesheet" href="{{ asset('css/estilosaulasregistro.css') }}">
     <title>Registro de Aulas</title>
 </head>
 <body>
     <h1>Registrar Aulas</h1>
-    <form id="formAula" action="registrar_aula.php" method="post">
-        <div class="form-group">
+    <form action="{{ route('aula.store') }}" method="POST">
+        @csrf <!-- Token de seguridad obligatorio -->
+        <div>
             <label for="nombre_aula">Nombre del Aula:</label>
-            <input type="text" id="nombre_aula" name="nombre_aula" required>
+            <input type="text" name="nombre_aula" id="nombre_aula" required>
         </div>
-
-        <div class="form-group">
+        <div>
             <label for="capacidad">Capacidad:</label>
-            <input type="number" id="capacidad" name="capacidad" min="1" required>
+            <input type="number" name="capacidad" id="capacidad" min="1" required>
         </div>
-
-        <div class="form-group">
+        <div>
             <label for="ubicacion">Ubicación:</label>
-            <input type="text" id="ubicacion" name="ubicacion" required>
+            <input type="text" name="ubicacion" id="ubicacion" required>
         </div>
-
         <button type="submit">Registrar Aula</button>
+
         <button type="button" id="vaciar" onclick="vaciarFormulario()">Vaciar Formulario</button>
     </form>
     
-    <script src="../js/scriptregistrolibro.js"></script>
+    <script src="{{ asset('js/scriptregistrolibro.js') }}"></script>
+    <script src="{{ asset('js/GuardadoyLimpiar.js') }}"></script>
 </body>
 </html>
