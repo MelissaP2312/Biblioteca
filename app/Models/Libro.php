@@ -23,4 +23,15 @@ class Libro extends Model
         'ranking',
         'imagen',
     ];
+
+    public function calificaciones()
+    {
+        return $this->hasMany(Calificacion::class);
+    }
+
+    public function promedioRanking()
+    {
+        return $this->calificaciones()->avg('puntuacion');
+    }
+
 }

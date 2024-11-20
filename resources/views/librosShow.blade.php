@@ -46,5 +46,21 @@
             <p>{{ $libro->descripcion }}</p>
         </div>
     </div>
+    <div class="calificacion-form">
+        <form action="{{ route('libros.addCalificacion', ['id' => $libro->id]) }}" method="POST">
+            @csrf
+            <label for="puntuacion">Calificación (1-5):</label>
+            <select name="puntuacion" id="puntuacion" required>
+                <option value="" disabled selected>Selecciona</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <button type="submit">Enviar Calificación</button>
+        </form>
+    </div>   
+    
 </body>
 </html>

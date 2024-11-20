@@ -10,12 +10,18 @@ class LibroVistaController extends Controller
     // Método para mostrar la vista principal con los libros
     public function index()
     {
-        // Obtener todos los libros de la base de datos
         $libros = Libro::all();
 
-        // Retornar la vista principal con los libros
-        return view('main', compact('libros'));
+        // Libros destacados ordenados por el promedio de puntuación
+        $librosDestacados = Libro::with('calificaciones')
+            ->get()
+            ->sortByDesc(fn($libro) => $libro->promedioRanking())
+            ->take(10);
+
+        return view('main', compact('libros', 'librosDestacados'));
     }
+
+
 
     // Método para obtener la imagen de un libro
     public function getImagen($id)
@@ -48,6 +54,54 @@ class LibroVistaController extends Controller
 
         // Retorna la vista con los datos del libro
         return view('librosShow', compact('libro'));
+    }
+
+    public function updateRanking(Request $request, $id)
+    {
+        // Validar que el ranking sea un número entre 1 y 5
+        $request->validate([
+            'ranking' => 'required|integer|min:1|max:5',
+        ]);
+
+        // Buscar el libro por ID
+        $libro = Libro::find($id);
+
+        if (!$libro) {
+            return redirect()->back()->with('error', 'Libro no encontrado.');
+        }
+
+        // Actualizar el ranking
+        $libro->ranking = $request->ranking;
+        $libro->save();
+
+        return redirect()->back()->with('success', 'Ranking actualizado correctamente.');
+    }
+
+    public function addCalificacion(Request $request, $id)
+    {
+        $request->validate([
+            'puntuacion' => 'required|integer|min:1|max:5',
+        ]);
+
+        $libro = Libro::find($id);
+
+        if (!$libro) {
+            return redirect()->back()->with('error', 'Libro no encontrado.');
+        }
+
+        // Guardar la calificación
+        $libro->calificaciones()->create([
+            'puntuacion' => $request->puntuacion,
+        ]);
+
+        // Calcular el promedio de las calificaciones
+        $promedio = $libro->calificaciones()->avg('puntuacion');
+
+        // Actualizar el ranking en la tabla libros
+        $libro->ranking = $promedio;
+        $libro->save();
+
+        return redirect()->back()->with('success', 'Calificación guardada y ranking actualizado correctamente.');
     }
 
 

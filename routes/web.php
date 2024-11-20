@@ -79,4 +79,6 @@ Route::view('/admin/devolucion', 'VR5')->name('admin.devolution');
 Route::get('/', [LibroVistaController::class, 'index'])->name('main');
 Route::get('libros/imagen/{id}', [LibroVistaController::class, 'getImagen'])->name('libros.imagen');
 Route::get('/libros/{id}', [LibroVistaController::class, 'show'])->name('libros.show');
+Route::post('/libros/{id}/ranking', [LibroVistaController::class, 'updateRanking'])->name('libros.updateRanking');
+Route::post('/libros/{id}/calificacion', [LibroVistaController::class, 'addCalificacion'])->name('libros.addCalificacion');
 
