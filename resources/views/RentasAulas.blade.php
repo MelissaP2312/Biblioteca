@@ -63,6 +63,46 @@
         <a href="{{ url('/admin/rentas') }}" class="btn-regresar">Regresar al Administrador</a>
     </div>
 
+    <script>
+        // Función para guardar datos en localStorage
+        document.addEventListener("DOMContentLoaded", function() {
+            // Verificar si el usuario está offline
+            if (!navigator.onLine) {
+                // Verifica si ya tenemos datos guardados en localStorage
+                const savedData = localStorage.getItem('rentaAulaForm');
+                if (savedData) {
+                    const formData = JSON.parse(savedData);
+                    // Rellena el formulario con los datos guardados
+                    document.getElementById('nombre_aula').value = formData.nombre_aula || '';
+                    document.getElementById('usuario_id').value = formData.usuario_id || '';
+                    document.getElementById('fecha_prestamo').value = formData.fecha_prestamo || '';
+                    document.getElementById('hora_inicio').value = formData.hora_inicio || '';
+                    document.getElementById('hora_fin').value = formData.hora_fin || '';
+                }
+            }
+
+            // Guardar los datos en localStorage cuando el formulario cambia
+            document.getElementById('formAula').addEventListener('input', function() {
+                if (!navigator.onLine) {
+                    const formData = {
+                        nombre_aula: document.getElementById('nombre_aula').value,
+                        usuario_id: document.getElementById('usuario_id').value,
+                        fecha_prestamo: document.getElementById('fecha_prestamo').value,
+                        hora_inicio: document.getElementById('hora_inicio').value,
+                        hora_fin: document.getElementById('hora_fin').value,
+                    };
+                    localStorage.setItem('rentaAulaForm', JSON.stringify(formData));
+                }
+            });
+        });
+
+        // Función para vaciar el formulario y eliminar los datos guardados en localStorage
+        function clearForm() {
+            localStorage.removeItem('rentaAulaForm');
+            document.getElementById('formAula').reset();
+        }
+    </script>
+
     <script src="{{ asset('js/scriptrentas.js') }}"></script>
     <script src="{{ asset('js/GuardadoyLimpiar.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

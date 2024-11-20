@@ -30,6 +30,42 @@
         <button type="submit">Añadir Material</button>
         <button type="button" id="vaciar" onclick="vaciarFormulario()">Vaciar Formulario</button>
     </form>
+
+    <script>
+        // Función para guardar datos en localStorage
+        document.addEventListener("DOMContentLoaded", function() {
+            // Verificar si el usuario está offline
+            if (!navigator.onLine) {
+                // Verifica si ya tenemos datos guardados en localStorage
+                const savedData = localStorage.getItem('formMaterial');
+                if (savedData) {
+                    const formData = JSON.parse(savedData);
+                    // Rellena el formulario con los datos guardados
+                    document.getElementById('tipo').value = formData.tipo || '';
+                    document.getElementById('unidades').value = formData.unidades || '';
+                }
+            }
+
+            // Guardar los datos en localStorage cuando el formulario cambia
+            document.getElementById('formMaterial').addEventListener('input', function() {
+                if (!navigator.onLine) {
+                    const formData = {
+                        tipo: document.getElementById('tipo').value,
+                        unidades: document.getElementById('unidades').value,
+                    };
+                    localStorage.setItem('formMaterial', JSON.stringify(formData));
+                }
+            });
+        });
+
+        // Función para vaciar el formulario y eliminar los datos guardados en localStorage
+        function vaciarFormulario() {
+            localStorage.removeItem('formMaterial');
+            document.getElementById('tipo').value = '';
+            document.getElementById('unidades').value = '';
+        }
+    </script>
+
     
     <script src="../js/scriptregistromaterial.js"></script>
 
