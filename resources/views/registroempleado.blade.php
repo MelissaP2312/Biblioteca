@@ -113,5 +113,69 @@
 
 <script src="../js/script2.js"></script>
 
+<!-- Almacenamiento offline -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Verificar si el usuario está offline
+        if (!navigator.onLine) {
+            // Verifica si ya tenemos datos guardados en localStorage
+            const savedData = localStorage.getItem('formEmpleado');
+            if (savedData) {
+                const formData = JSON.parse(savedData);
+                // Rellena el formulario con los datos guardados
+                document.getElementById('id_empleado').value = formData.id_empleado || '';
+                document.getElementById('nombre').value = formData.nombre || '';
+                document.getElementById('edad').value = formData.edad || '';
+                document.getElementById('telefono').value = formData.telefono || '';
+                document.getElementById('email').value = formData.email || '';
+                document.getElementById('password').value = formData.password || '';
+                document.getElementById('password-confirm').value = formData.password_confirmation || '';
+                document.getElementById('puesto').value = formData.puesto || '';
+                document.getElementById('fecha_ingreso').value = formData.fecha_ingreso || '';
+                document.getElementById('departamento').value = formData.departamento || '';
+                // Rellenar el género si existe
+                if (formData.genero) {
+                    document.querySelector(`input[name="genero"][value="${formData.genero}"]`).checked = true;
+                }
+            }
+        }
+
+        // Guardar los datos en localStorage cuando el formulario cambia
+        document.querySelector('form').addEventListener('input', function() {
+            if (!navigator.onLine) {
+                const formData = {
+                    id_empleado: document.getElementById('id_empleado').value,
+                    nombre: document.getElementById('nombre').value,
+                    edad: document.getElementById('edad').value,
+                    telefono: document.getElementById('telefono').value,
+                    email: document.getElementById('email').value,
+                    password: document.getElementById('password').value,
+                    password_confirmation: document.getElementById('password-confirm').value,
+                    puesto: document.getElementById('puesto').value,
+                    fecha_ingreso: document.getElementById('fecha_ingreso').value,
+                    departamento: document.getElementById('departamento').value,
+                    genero: document.querySelector('input[name="genero"]:checked') ? document.querySelector('input[name="genero"]:checked').value : null
+                };
+                localStorage.setItem('formEmpleado', JSON.stringify(formData));
+            }
+        });
+    });
+
+    // Función para vaciar el formulario y eliminar los datos guardados en localStorage
+    function vaciarFormulario() {
+        localStorage.removeItem('formEmpleado');
+        document.getElementById('id_empleado').value = '';
+        document.getElementById('nombre').value = '';
+        document.getElementById('edad').value = '';
+        document.getElementById('telefono').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('password').value = '';
+        document.getElementById('password-confirm').value = '';
+        document.getElementById('puesto').value = '';
+        document.getElementById('fecha_ingreso').value = '';
+        document.getElementById('departamento').value = '';
+        document.querySelector('input[name="genero"]:checked').checked = false;
+    }
+</script>
 </body>
 </html>

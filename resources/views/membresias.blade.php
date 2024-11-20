@@ -18,6 +18,40 @@
             <p><strong>Teléfono:</strong> <span id="telefono">Cargando...</span></p>
         </div>
     </div>
+        <!-- Almacenamiento offline -->
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Verificar si el usuario está offline
+            if (!navigator.onLine) {
+                // Verifica si ya tenemos datos guardados en localStorage
+                const savedData = localStorage.getItem('membresiaData');
+                if (savedData) {
+                    const formData = JSON.parse(savedData);
+                    // Rellena los datos con los valores guardados
+                    document.getElementById('personaId').innerText = formData.personaId || 'No disponible';
+                    document.getElementById('nombre').innerText = formData.nombre || 'No disponible';
+                    document.getElementById('numeroMembresia').innerText = formData.numeroMembresia || 'No disponible';
+                    document.getElementById('nivelMembresia').innerText = formData.nivelMembresia || 'No disponible';
+                    document.getElementById('penalizaciones').innerText = formData.penalizaciones || 'No disponible';
+                    document.getElementById('telefono').innerText = formData.telefono || 'No disponible';
+                }
+            }
+
+            // Guardar los datos en localStorage cuando estemos offline
+            if (!navigator.onLine) {
+                const datosMembresia = {
+                    personaId: document.getElementById('personaId').innerText,
+                    nombre: document.getElementById('nombre').innerText,
+                    numeroMembresia: document.getElementById('numeroMembresia').innerText,
+                    nivelMembresia: document.getElementById('nivelMembresia').innerText,
+                    penalizaciones: document.getElementById('penalizaciones').innerText,
+                    telefono: document.getElementById('telefono').innerText
+                };
+
+                localStorage.setItem('membresiaData', JSON.stringify(datosMembresia));
+            }
+        });
+    </script>
     <script src="../js/membresias.js"></script>
 </body>
 </html>

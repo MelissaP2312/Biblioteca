@@ -33,5 +33,46 @@
     
     <script src="{{ asset('js/scriptregistrolibro.js') }}"></script>
     <script src="{{ asset('js/GuardadoyLimpiar.js') }}"></script>
+    
+    <!-- Almacenamiento offline -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Verifica si el usuario está offline
+        if (!navigator.onLine) {
+            // Verifica si ya tenemos datos guardados en localStorage
+            const savedData = localStorage.getItem('formAula');
+            if (savedData) {
+                const formData = JSON.parse(savedData);
+                // Rellena el formulario con los datos guardados
+                document.getElementById('nombre_aula').value = formData.nombre_aula || '';
+                document.getElementById('capacidad').value = formData.capacidad || '';
+                document.getElementById('ubicacion').value = formData.ubicacion || '';
+                document.getElementById('disponible').checked = formData.disponible || false;
+            }
+        }
+
+        // Guarda los datos en localStorage cuando el formulario cambia
+        document.querySelector('form').addEventListener('input', function() {
+            if (!navigator.onLine) {
+                const formData = {
+                    nombre_aula: document.getElementById('nombre_aula').value,
+                    capacidad: document.getElementById('capacidad').value,
+                    ubicacion: document.getElementById('ubicacion').value,
+                    disponible: document.getElementById('disponible').checked
+                };
+                localStorage.setItem('formAula', JSON.stringify(formData));
+            }
+        });
+    });
+
+    // Función para vaciar el formulario y eliminar los datos guardados en localStorage
+    function vaciarFormulario() {
+        localStorage.removeItem('formAula');
+        document.getElementById('nombre_aula').value = '';
+        document.getElementById('capacidad').value = '';
+        document.getElementById('ubicacion').value = '';
+        document.getElementById('disponible').checked = false;
+    }
+</script>
 </body>
 </html>

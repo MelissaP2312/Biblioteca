@@ -1,19 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // URL de la API que devuelve los libros (ajusta esta URL a la real)
-    const apiUrl = 'https://miapi.com/libros';
-
-    // Contenedor donde se añadirán las tarjetas de libros
+    const apiUrl = 'https://miapi.com/libros'; // URL de la API
     const librosContainer = document.getElementById('libros');
-    
-    // Indicador de carga
     const loadingElement = document.getElementById('loading');
 
-    // Función para crear cada tarjeta de libro de forma dinámica
     const createBookCard = (libro) => {
         const contenedorLibro = document.createElement('div');
         contenedorLibro.className = 'ContenedorLibro';
 
-        // Estructura del contenido de la tarjeta
         contenedorLibro.innerHTML = `
             <h4 id="nombre-libro">${libro.nombre}</h4>
             <img src="${libro.imagen}" alt="Portada libro" />
@@ -22,73 +15,50 @@ document.addEventListener('DOMContentLoaded', () => {
             <p>Género</p>
             <p id="genero">${libro.genero}</p>
         `;
-
         return contenedorLibro;
     };
 
-    const fetchWithTimeout = (url, options, timeout = 10000) => {
-    return new Promise((resolve, reject) => {
-        const timer = setTimeout(() => {
-            reject(new Error('Tiempo de espera agotado'));
-        }, timeout);
-
-        fetch(url, options)
-            .then(response => {
-                clearTimeout(timer);
-                resolve(response);
-            })
-            .catch(err => {
-                clearTimeout(timer);
-                reject(err);
-            });
-    });
-};
-
-
-    // Función para cargar los libros desde la API
     const loadBooks = async () => {
-        let hasResponse = false; // Flag para controlar si se ha recibido respuesta
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 10000); // Timeout de 10 segundos
+        let hasResponse = false;
 
         try {
-            // Mostrar el indicador de carga
-            loadingElement.style.display = 'block';
+            loadingElement.style.display = 'block'; // Mostrar indicador de carga
 
-            const response = await fetchWithTimeout(apiUrl, {}, 10000); // Timeout de 10 segundos
+            const response = await fetch(apiUrl, { signal: controller.signal });
+            clearTimeout(timeout);
 
             if (!response.ok) {
                 throw new Error('Error en la respuesta de la API');
             }
 
             const libros = await response.json();
-            hasResponse = true; // Marca que hemos recibido una respuesta correcta
+            hasResponse = true;
 
-            // Limpiar el contenedor de libros por si hay contenido previo
-            librosContainer.innerHTML = '';
+            if (!Array.isArray(libros)) {
+                throw new Error('Formato de datos incorrecto');
+            }
 
-            // Recorrer los libros y crear las tarjetas
-            libros.forEach(libro => {
+            librosContainer.innerHTML = ''; // Limpiar contenido previo
+            libros.forEach((libro) => {
                 const bookCard = createBookCard(libro);
                 librosContainer.appendChild(bookCard);
             });
         } catch (error) {
-           swal.fire({
-               icon: 'error',
-               title: 'Error',
-               text: 'Error en la respuesta de la API',
-               confirmButtonText: 'Aceptar'
-           }).then(() => {
-               // Ocultar el indicador de carga
-               loadingElement.style.display = 'none';
-           })
-           
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: error.message || 'Hubo un problema al cargar los libros.',
+                confirmButtonText: 'Aceptar'
+            });
         } finally {
-            // Solo ocultar el spinner si se recibió una respuesta exitosa
-            if (hasResponse) {
-                loadingElement.style.display = 'none';
+            if (!hasResponse) {
+                librosContainer.innerHTML = '<p>No se pudieron cargar los libros. Intenta nuevamente más tarde.</p>';
             }
+            loadingElement.style.display = 'none'; // Ocultar indicador de carga
         }
     };
 
-    // Llamar a la función para cargar los libros al cargar la página
     loadBooks();
 });

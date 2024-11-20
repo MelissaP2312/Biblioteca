@@ -155,6 +155,34 @@
         </div>
         @endforeach
     </div>
+    {{-- Almacenamiento offline --}}
+    <script src="{{ asset('js/offlineStorage.js') }}"></script>
+    <script>
+        // Verifica si el usuario está offline
+        if (!navigator.onLine) {
+            // Obtiene los filtros de búsqueda y guardarlos en localStorage
+            const searchQuery = document.getElementById('search') ? document.getElementById('search').value : '';
+            const generoFilter = document.getElementById('genero') ? document.getElementById('genero').value : '';
+            const autorFilter = document.getElementById('autor') ? document.getElementById('autor').value : '';
+
+            // Guarda los datos en localStorage
+            const filterData = {
+                search: searchQuery,
+                genero: generoFilter,
+                autor: autorFilter
+            };
+
+            localStorage.setItem('librosSearchFilters', JSON.stringify(filterData));
+        } else {
+            // Restaura los filtros si los datos están en localStorage cuando el usuario vuelva en línea
+            const savedFilters = JSON.parse(localStorage.getItem('librosSearchFilters'));
+            if (savedFilters) {
+                document.getElementById('search').value = savedFilters.search;
+                document.getElementById('genero').value = savedFilters.genero;
+                document.getElementById('autor').value = savedFilters.autor;
+            }
+        }
+    </script>
 
 </body>
 </html>
