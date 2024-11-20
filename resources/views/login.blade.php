@@ -57,7 +57,7 @@
                     <br>
                     <a class="link" href="" id="contraseña-forgotten">¿Olvidaste tu contraseña?</a>
                     <br>
-                    <a class="link" href="">Iniciar como empleado</a>
+                    <a class="link" href="{{ route('empleado.login') }}">Iniciar como empleado</a>
                     <br>
                     <br>
                     <div class="wrapper">

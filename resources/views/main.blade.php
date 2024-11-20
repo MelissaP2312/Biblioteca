@@ -4,44 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biblioteca</title>
-    <link rel="stylesheet" href="../css/Libreria.css">
+    <link rel="stylesheet" href="{{ asset('css/Libreria.css') }}">
     <style>
-        /* Estilo para el menú desplegable */
-        .dropdown {
-            position: relative;
-            display: inline-block;
+        /* Estilo para la lista de libros */
+        .libros-list {
+            display: flex; /* Cambiamos a flexbox */
+            flex-wrap: wrap; /* Permite que las tarjetas pasen a la siguiente fila si no caben */
+            justify-content: flex-start; /* Alineación horizontal de las tarjetas */
+            gap: 20px; /* Espacio entre las tarjetas */
+            padding: 20px; /* Espacio interno para todo el contenedor */
         }
-        
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f7e5af;
-            min-width: 160px;
-            border: 1px solid #000000;
+        .libro-card {
+            width: 280px; /* Fija el ancho de las tarjetas */
+            border: 1px solid #ddd;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            z-index: 1;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            transition: transform 0.3s ease;
         }
-
-        .dropdown-content a {
-            display: block;
-            padding: 10px;
-            color: #000000;
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        .libro-card:hover {
+            transform: scale(1.05);
+        }
+        .libro-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        .libro-card .card-content {
+            padding: 15px;
+        }
+        .libro-card h2 {
+            font-size: 22px;
+            margin: 10px 0;
+            color: #333;
+        }
+        .libro-card p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #777;
+        }
+        .libro-card .descripcion {
+            font-size: 13px;
+            color: #555;
+            margin-top: 10px;
+        }
+        .libro-link {
             text-decoration: none;
-            background-color: white;
-            text-align: center;
-            border-bottom: 1px solid #d9d9d9;
-            background-color: #f7e5af;
+            color: inherit;
         }
-
-        .dropdown-content a:hover {
-            background-color: #badcd5;
-            transition: background 0.3s ease;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
+        .libro-link:hover .libro-card {
+            transform: scale(1.05);
         }
     </style>
 </head>
@@ -61,15 +74,30 @@
             </li>
             <li>Membresía</li>
             <li>Renta</li>
-            <li><a href="{{ url('/foros') }}"></a>Foros</li>
+            <li><a href="{{ url('/foros') }}">Foros</a></li>
         </ul>
         <a class="btn btn-danger btn-md" href="{{ route('login') }}">Iniciar sesión</a>
     </nav>
+
     <div id="contenedor-principal">
         <div id="libros">
-            <div id="loading"></div>
+            <!-- Ajustamos el contenedor de las tarjetas -->
+            <div class="libros-list">
+                @foreach($libros as $libro)
+                <a href="{{ route('libros.show', ['id' => $libro->id]) }}" class="libro-link">
+                    <div class="libro-card">
+                    <img src="{{ $libro->imagen ? 'data:image/jpeg;base64,' . base64_encode($libro->imagen) : asset('images/default-book-image.jpg') }}" alt="{{ $libro->nombre }}">
+                    <div class="card-content">
+                        <h2>{{ $libro->nombre }}</h2>
+                        <!-- Unidades disponibles -->
+                        <p><strong>Unidades Disponibles:</strong> {{ $libro->unidades }}</p>
+                    </div>
+                </div>
+                @endforeach
+            </div>
         </div>
     </div>
+
     <div id="rankings">
         <div class="contenedorrank" id="rankings-title">
             <h4>Rankings</h4>
@@ -78,10 +106,15 @@
             <p>Libros más rentados</p>
         </div>
     </div>
+
     <div id="footer">
         <p>Copyright SoftLibrary © . All rights reserved.</p>
     </div>
+
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="../js/main.js"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
+    <script>
+        var libros = @json($libros); // Pasa los libros como un array JSON
+    </script>
 </body>
 </html>

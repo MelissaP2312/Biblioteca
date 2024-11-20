@@ -44,6 +44,7 @@ class Empleado extends Authenticatable
         'telefono',
         'email',
         'password',
+        'rol', 
     ];
 
     /**

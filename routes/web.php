@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\LibroController;
+use App\Http\Controllers\LibroVistaController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\AulaController;
 use App\Http\Controllers\RentaLibroController;
@@ -45,7 +46,6 @@ Route::get('/admin/devolucion/material', [RentaMaterialController::class, 'creat
 Route::post('/admin/devolucion/material', [RentaMaterialController::class, 'storeDevolucion'])->name('rentas_materiales.devolucion.store'); // Guardar la devolución
 Route::get('/admin/devoluciones/material', [RentaMaterialController::class, 'indexDevoluciones'])->name('rentas_materiales.devolucion.index'); // Listar las devoluciones
 
-
 // Rutas para renta de aula
 Route::get('/admin/rentas/aulas', [RentaAulaController::class, 'create'])->name('rentas_aulas.create');
 Route::post('/admin/rentas/aulas', [RentaAulaController::class, 'store'])->name('rentas_aulas.store');
@@ -75,3 +75,8 @@ Route::view('/admin/foros', 'VR4')->name('admin.foro');
 Route::view('/admin/registro', 'VR2')->name('admin.register');
 Route::view('contraseña', 'recuperaContraseña')->name('password.reset');
 Route::view('/admin/devolucion', 'VR5')->name('admin.devolution');
+
+Route::get('/', [LibroVistaController::class, 'index'])->name('main');
+Route::get('libros/imagen/{id}', [LibroVistaController::class, 'getImagen'])->name('libros.imagen');
+Route::get('/libros/{id}', [LibroVistaController::class, 'show'])->name('libros.show');
+

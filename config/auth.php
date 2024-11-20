@@ -41,8 +41,8 @@ return [
             'provider' => 'users',
         ],
         'empleado' => [
-        'driver' => 'session',
-        'provider' => 'empleados',
+            'driver' => 'session',
+            'provider' => 'empleados',
         ],
     ],
 
@@ -70,8 +70,8 @@ return [
         ],
 
         'empleados' => [
-        'driver' => 'eloquent',
-        'model' => App\Models\Empleado::class,
+            'driver' => 'eloquent',
+            'model' => App\Models\Empleado::class,
         ],
         // 'users' => [
         //     'driver' => 'database',
