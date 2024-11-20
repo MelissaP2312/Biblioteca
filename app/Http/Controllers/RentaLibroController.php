@@ -9,10 +9,11 @@ use App\Models\User;
 
 class RentaLibroController extends Controller
 {
+    // Mostrar formulario para registrar una nueva renta
     public function create()
     {
-        $libros = Libro::all();  // Asumiendo que tienes un modelo Libro
-        $usuarios = User::all(); // Asumiendo que tienes un modelo User
+        $libros = Libro::all();  // Obtener todos los libros
+        $usuarios = User::all(); // Obtener todos los usuarios
         return view('RentaLibro', compact('libros', 'usuarios'));
     }
 
@@ -48,5 +49,50 @@ class RentaLibroController extends Controller
         $libro->save();
 
         return redirect()->route('rentas_libros.create')->with('success', 'Renta registrada con éxito.');
+    }
+
+    // Mostrar listado de todas las rentas
+    public function index()
+    {
+        $rentas = RentaLibro::all();
+        return view('rentasLibros', compact('rentas'));
+    }
+
+    // Mostrar formulario para registrar una devolución
+    public function createDevolucion()
+    {
+        $rentas = RentaLibro::whereNull('fecha_devolucion')->get(); // Solo rentas no devueltas
+        return view('devoluciones', compact('rentas'));
+    }
+
+    // Registrar una devolución
+    public function storeDevolucion(Request $request)
+    {
+        // Validar los datos del formulario
+        $request->validate([
+            'renta_id' => 'required|exists:rentas_libros,id',
+            'fecha_devolucion' => 'required|date',
+        ]);
+
+        // Buscar la renta
+        $renta = RentaLibro::findOrFail($request->renta_id);
+
+        // Actualizar la fecha de devolución
+        $renta->fecha_devolucion = $request->fecha_devolucion;
+        $renta->save();
+
+        // Restaurar las unidades disponibles del libro
+        $libro = Libro::where('nombre', $renta->nombre_libro)->first();
+        $libro->unidades += $renta->unidades_disponibles;
+        $libro->save();
+
+        return redirect()->route('rentas_libros.devolucion.create')->with('success', 'Devolución registrada con éxito.');
+    }
+
+    // Mostrar listado de rentas devueltas
+    public function indexDevoluciones()
+    {
+        $devoluciones = RentaLibro::whereNotNull('fecha_devolucion')->get(); // Rentas devueltas
+        return view('listaDevoluciones', compact('devoluciones'));
     }
 }

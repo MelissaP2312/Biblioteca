@@ -29,16 +29,26 @@ Route::post('/admin/registro/material', [MaterialController::class, 'store'])->n
 // Rutas para rentas de libros
 Route::get('/admin/rentas/libros', [RentaLibroController::class, 'create'])->name('rentas_libros.create');
 Route::post('/admin/rentas/libros', [RentaLibroController::class, 'store'])->name('rentas_libros.store');
+Route::get('/admin/rentas-libros', [RentaLibroController::class, 'index'])->name('rentasLibros.index');
+Route::get('/admin/devolucion/libros', [RentaLibroController::class, 'createDevolucion'])->name('rentas_libros.devolucion.create');
+Route::post('/admin/devolucion/libros', [RentaLibroController::class, 'storeDevolucion'])->name('rentas_libros.devolucion.store');
+Route::get('/admin/devolucion-libros', [RentaLibroController::class, 'indexDevoluciones'])->name('rentas_libros.devolucion.index');
 
 // Rutas para renta de materiales
 Route::get('/admin/rentas/materiales', [RentaMaterialController::class, 'create'])->name('rentas_materiales.create');
 Route::post('/admin/rentas/materiales', [RentaMaterialController::class, 'store'])->name('rentas_materiales.store');
+Route::get('/admin/rentas-materiales', [RentaMaterialController::class, 'index'])->name('rentasMaterial.index');
+// Rutas para devoluciones de materiales
+Route::get('/admin/devolucion/material', [RentaMaterialController::class, 'createDevolucion'])->name('rentas_materiales.devolucion.create'); // Mostrar el formulario de devolución
+Route::post('/admin/devolucion/material', [RentaMaterialController::class, 'storeDevolucion'])->name('rentas_materiales.devolucion.store'); // Guardar la devolución
+Route::get('/admin/devoluciones/material', [RentaMaterialController::class, 'indexDevoluciones'])->name('rentas_materiales.devolucion.index'); // Listar las devoluciones
+
 
 // Rutas para renta de aula
 Route::get('/admin/rentas/aulas', [RentaAulaController::class, 'create'])->name('rentas_aulas.create');
 Route::post('/admin/rentas/aulas', [RentaAulaController::class, 'store'])->name('rentas_aulas.store');
-Route::post('/verificar-disponibilidad', [RentasAulasController::class, 'verificarDisponibilidad']);
-
+Route::post('/verificar-disponibilidad', [RentaAulaController::class, 'verificarDisponibilidad']);
+Route::get('/admin/rentas-aulas', [RentaAulaController::class, 'index'])->name('rentasAula.index');
 
 // Rutas de autenticación
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -55,3 +65,4 @@ Route::view('/admin/rentas', 'VR3')->name('admin.rent');
 Route::view('/admin/foros', 'VR4')->name('admin.foro');
 Route::view('/admin/registro', 'VR2')->name('admin.register');
 Route::view('contraseña', 'recuperaContraseña')->name('password.reset');
+Route::view('/admin/devolucion', 'VR5')->name('admin.devolution');

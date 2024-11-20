@@ -81,5 +81,12 @@ class RentaAulaController extends Controller
 
     }
 
+    public function index()
+    {
+        // Obtener todas las rentas de libros
+        $rentas = RentaAula::all();
+        return view('rentasAula', compact('rentas'));
+    }
+
 
 }

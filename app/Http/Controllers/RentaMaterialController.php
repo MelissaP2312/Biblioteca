@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\RentaMaterial;
-use Illuminate\Http\Request;
 use App\Models\Material;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class RentaMaterialController extends Controller
 {
-    // Mostrar el formulario de renta
+    // Mostrar el formulario de renta de materiales
     public function create()
     {
         // Obtener todos los materiales y usuarios
@@ -18,7 +18,7 @@ class RentaMaterialController extends Controller
         return view('RentasMateriales', compact('materiales', 'usuarios'));
     }
 
-    // Guardar una nueva renta
+    // Guardar una nueva renta de material
     public function store(Request $request)
     {
         // Validar los datos del formulario
@@ -50,5 +50,55 @@ class RentaMaterialController extends Controller
         $material->save();
 
         return redirect()->route('rentas_materiales.create')->with('success', 'Renta registrada con éxito.');
+    }
+
+    // Listar todas las rentas de materiales
+    public function index()
+    {
+        // Obtener todas las rentas de materiales
+        $rentas = RentaMaterial::all();
+        return view('rentasMaterial', compact('rentas'));
+    }
+
+    // Mostrar el formulario para devolver materiales
+    public function createDevolucion()
+{
+    // Obtener todas las rentas activas que no han sido devueltas
+    $rentas = RentaMaterial::whereNull('fecha_devolucion')->get(); // Filtra las rentas que no tienen fecha de devolución
+
+    return view('devolucionMaterial', compact('rentas')); // Pasar la variable $rentas a la vista
+}
+
+
+    // Procesar la devolución de un material
+    public function storeDevolucion(Request $request)
+    {
+        // Validar la devolución
+        $request->validate([
+            'renta_id' => 'required|exists:rentas_material,id', // Verificar que la renta existe
+            'fecha_devolucion' => 'required|date', // Validar que la fecha de devolución sea una fecha válida
+        ]);
+
+        // Obtener la renta seleccionada
+        $renta = RentaMaterial::find($request->renta_id);
+
+        // Marcar la renta como devuelta
+        $renta->fecha_devolucion = $request->fecha_devolucion;
+        $renta->save();
+
+        // Recuperar las unidades devueltas en el material
+        $material = Material::where('tipo', $renta->nombre_material)->first();
+        $material->unidades += $renta->unidades_disponibles;
+        $material->save();
+
+        return redirect()->route('rentas_materiales.devolucion.create')->with('success', 'Devolución registrada con éxito.');
+    }
+
+    // Listar todas las devoluciones de materiales
+    public function indexDevoluciones()
+    {
+        // Obtener todas las rentas que tienen fecha de devolución
+        $devoluciones = RentaMaterial::whereNotNull('fecha_devolucion')->get();
+        return view('listaDevolucionesMaterial', compact('devoluciones')); // Enviar las devoluciones a la vista
     }
 }

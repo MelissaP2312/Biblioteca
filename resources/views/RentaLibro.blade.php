@@ -38,6 +38,7 @@
             <div class="button-container">
                 <button type="submit" id="saveButton">Guardar</button>
                 <button type="button" onclick="clearForm()">Limpiar</button>
+                <button type="button"  onclick="window.location.href='{{ route('rentasLibros.index') }}'">Ver registros de Rentas</button>
             </div>
 
         </form>

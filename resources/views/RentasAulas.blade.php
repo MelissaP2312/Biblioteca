@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ asset('css/estiloslibrosregistro.css') }}">
-    <title>Renta de Libros</title>
+    <title>Renta de Aulas</title>
 </head>
 <body>
     <h1>Rentar un Aula</h1>
@@ -53,6 +53,7 @@
             <div class="button-container">
                 <button type="submit" id="saveButton">Guardar</button>
                 <button type="button" onclick="clearForm()">Limpiar</button>
+                <button type="button"  onclick="window.location.href='{{ route('rentasAula.index') }}'">Ver registros de Rentas</button>
             </div>
 
         </form>
