@@ -96,5 +96,74 @@
     </div>
 </div>
 <script src="../js/script2.js"></script>
+<script>
+// Guardar datos en localStorage cuando el usuario complete el formulario
+    document.getElementById("registerBtn").addEventListener("click", function(event) {
+    event.preventDefault(); // Evitar el envío del formulario para hacer el guardado en localStorage
+
+    // Obtener los valores del formulario
+    const nombre = document.getElementById("name").value;
+    const edad = document.getElementById("age").value;
+    const genero = document.querySelector('input[name="genero"]:checked').value;
+    const telefono = document.getElementById("phone").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    
+    // Almacenar los datos en localStorage
+    localStorage.setItem("nombre", nombre);
+    localStorage.setItem("edad", edad);
+    localStorage.setItem("genero", genero);
+    localStorage.setItem("telefono", telefono);
+    localStorage.setItem("email", email);
+    localStorage.setItem("password", password);
+
+    // Enviar el formulario si se necesita
+    document.querySelector("form").submit();
+});
+
+// Recuperar los datos del localStorage (si los tienes guardados)
+window.onload = function() {
+    if (localStorage.getItem("nombre")) {
+        document.getElementById("name").value = localStorage.getItem("nombre");
+        document.getElementById("age").value = localStorage.getItem("edad");
+        document.querySelector(`input[name="genero"][value="${localStorage.getItem("genero")}"]`).checked = true;
+        document.getElementById("phone").value = localStorage.getItem("telefono");
+        document.getElementById("email").value = localStorage.getItem("email");
+    }
+};
+</script>
+<!-- Almacenamiento offline -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Verifica si el usuario está offline
+        if (!navigator.onLine) {
+            // Verifica si ya tenemos datos guardados en localStorage
+            const savedData = localStorage.getItem('formRegistro');
+            if (savedData) {
+                const formData = JSON.parse(savedData);
+                // Rellena el formulario con los datos guardados
+                document.getElementById('name').value = formData.nombre || '';
+                document.getElementById('age').value = formData.edad || '';
+                document.querySelector(`input[name="genero"][value="${formData.genero}"]`).checked = true;
+                document.getElementById('phone').value = formData.telefono || '';
+                document.getElementById('email').value = formData.email || '';
+            }
+        }
+
+        // Guarda los datos en localStorage cuando el formulario cambia
+        document.querySelector('form').addEventListener('input', function() {
+            if (!navigator.onLine) {
+                const formData = {
+                    nombre: document.getElementById('name').value,
+                    edad: document.getElementById('age').value,
+                    genero: document.querySelector('input[name="genero"]:checked').value,
+                    telefono: document.getElementById('phone').value,
+                    email: document.getElementById('email').value
+                };
+                localStorage.setItem('formRegistro', JSON.stringify(formData));
+            }
+        });
+    });
+</script>
 </body>
 </html>

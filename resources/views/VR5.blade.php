@@ -26,7 +26,6 @@
             <div class="footer-date-time" id="dateTime"></div>
         </div>
 
-        <script src="../js/scriptfooterHorayFecha.js"></script> 
 
     </body>
 </html>

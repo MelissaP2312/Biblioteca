@@ -131,6 +131,55 @@
             });
         });
     </script>
+    <script>
+        
+    // Función para manejar el almacenamiento offline
+    document.addEventListener("DOMContentLoaded", function() {
+            // Verificar si el usuario está offline
+            if (!navigator.onLine) {
+                // Verifica si ya tenemos datos guardados en localStorage
+                const savedData = localStorage.getItem('formLibro');
+                if (savedData) {
+                    const formData = JSON.parse(savedData);
+                    // Rellena el formulario con los datos guardados
+                    document.getElementById('nombre').value = formData.nombre || '';
+                    document.getElementById('autor').value = formData.autor || '';
+                    document.getElementById('genero').value = formData.genero || '';
+                    document.getElementById('descripcion').value = formData.descripcion || '';
+                    document.getElementById('isbn').value = formData.isbn || '';
+                    document.getElementById('unidades').value = formData.unidades || '';
+                }
+            }
+
+            // Guardar los datos en localStorage cuando el formulario cambia
+            document.getElementById('formLibro').addEventListener('input', function() {
+                if (!navigator.onLine) {
+                    const formData = {
+                        nombre: document.getElementById('nombre').value,
+                        autor: document.getElementById('autor').value,
+                        genero: document.getElementById('genero').value,
+                        descripcion: document.getElementById('descripcion').value,
+                        isbn: document.getElementById('isbn').value,
+                        unidades: document.getElementById('unidades').value,
+                    };
+                    localStorage.setItem('formLibro', JSON.stringify(formData));
+                }
+            });
+        });
+
+        // Función para vaciar el formulario y eliminar los datos guardados en localStorage
+        function clearForm() {
+            localStorage.removeItem('formLibro');
+            document.getElementById('nombre').value = '';
+            document.getElementById('autor').value = '';
+            document.getElementById('genero').value = '';
+            document.getElementById('descripcion').value = '';
+            document.getElementById('isbn').value = '';
+            document.getElementById('unidades').value = '';
+        }
+    </script>
+    
+
 
 </body>
 </html>
