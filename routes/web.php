@@ -9,6 +9,8 @@ use App\Http\Controllers\AulaController;
 use App\Http\Controllers\RentaLibroController;
 use App\Http\Controllers\RentaAulaController;
 use App\Http\Controllers\RentaMaterialController;
+use App\Http\Controllers\Auth\LoginEmpleadoController;
+use App\Http\Controllers\Auth\RegisterEmpleadoController;
 
 // Rutas para registro aulas
 Route::get('/admin/registro/aulas', [AulaController::class, 'create'])->name('aula.create'); 
@@ -56,6 +58,13 @@ Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/register', [RegisterController::class, 'create'])->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+
+// Rutas para el login y registro de empleados
+Route::get('/login/empleado', [LoginEmpleadoController::class, 'showLoginForm'])->name('empleado.login');
+Route::post('/login/empleado', [LoginEmpleadoController::class, 'login']);
+Route::post('/logout/empleado', [LoginEmpleadoController::class, 'logout'])->name('empleado.logout');
+Route::get('/register/empleado', [RegisterEmpleadoController::class, 'showRegistrationForm'])->name('empleado.register');
+Route::post('/register/empleado', [RegisterEmpleadoController::class, 'register']);
 
 // Rutas de vistas generales
 Route::view('/', 'main')->name('home');

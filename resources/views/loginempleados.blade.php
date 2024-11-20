@@ -29,16 +29,24 @@
             <div class="form-login"></br>
                 <h1>Iniciar sesión</h1>
                 </br>
-                <input type="text" id="userName" class="form-control input-sm chat-input" placeholder="usuario"/>
-                </br></br>
-                <input type="text" id="userPassword" class="form-control input-sm chat-input" placeholder="contraseña"/>
-                </br></br>
-                <div class="wrapper">
-                    <span class="group-btn">
-                        <a class="btn btn-danger btn-md" id="registerButton">Registrar <i class="fa fa-sign-in"></i></a>
-                        <a class="btn btn-danger btn-md">Login <i class="fa fa-sign-in"></i></a>
-                    </span>
-                </div>
+                <form action="{{ route('empleado.login') }}" method="POST">
+                    @csrf
+                    <input type="text" name="id_empleado" class="form-control input-sm chat-input" placeholder="ID de Empleado" required />
+                    </br></br>
+                    <input type="password" name="password" class="form-control input-sm chat-input" placeholder="Contraseña" required />
+                    </br></br>
+                    <div class="wrapper">
+                        <span class="group-btn">
+                            <a class="btn btn-danger btn-md" id="registerButton" href="{{ route('empleado.register') }}">Registrar</a>
+                            <button type="submit" class="btn btn-danger btn-md">Iniciar sesión <i class="fa fa-sign-in"></i></button>
+                        </span>
+                    </div>
+                </form>
+                @if(session('error'))
+                    <div class="alert alert-danger mt-2">
+                        {{ session('error') }}
+                    </div>
+                @endif
             </div>
         </div>
     </div>

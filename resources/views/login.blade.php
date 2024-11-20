@@ -56,6 +56,7 @@
                     </div>
                     <br>
                     <a class="link" href="" id="contraseña-forgotten">¿Olvidaste tu contraseña?</a>
+                    <br>
                     <a class="link" href="">Iniciar como empleado</a>
                     <br>
                     <br>
