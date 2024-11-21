@@ -1,101 +1,105 @@
-/* Estilos generales */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
     margin: 0;
     padding: 20px;
-    color: #333;
 }
 
-/* Encabezado */
 h1 {
+    color: #333;
     text-align: center;
-    color: #2c3e50;
     margin-bottom: 20px;
+    font-size: 32px;
 }
 
-/* Contenedor del formulario centrado */
-form {
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    max-width: 600px;
+.form-container {
+    max-width: 800px;
     margin: 0 auto;
-}
-
-.form-group {
-    margin-bottom: 15px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 label {
     display: block;
-    margin-bottom: 5px;
+    margin: 10px 0 5px;
     font-weight: bold;
-    color: #34495e;
+    color: #555;
 }
 
-/* Campos de entrada */
-input[type="text"],
-input[type="number"],
-select,
-textarea {
+select, input[type="number"] {
     width: 100%;
     padding: 10px;
-    border: 1px solid #bdc3c7;
+    margin-bottom: 15px;
+    border: 1px solid #ced4da;
     border-radius: 4px;
-    transition: border-color 0.3s;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
 }
 
-input[type="text"]:focus,
-input[type="number"]:focus,
-select:focus,
-textarea:focus {
-    border-color: #2980b9;
+select:focus, input:focus {
+    border-color: #80bdff;
     outline: none;
 }
 
-/* Botones */
+/* Centrar los botones */
+.button-container {
+    display: flex;
+    justify-content: center; /* Centra los botones horizontalmente */
+    align-items: center; /* Asegura que los botones estén verticalmente alineados */
+    gap: 10px; /* Espaciado entre los botones */
+    margin-top: 20px;
+}
+
 button {
-    background-color: #3498db;
+    padding: 10px 20px;
+    font-size: 14px;
     color: white;
-    padding: 10px 15px;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-    width: 48%;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+button[type="submit"] {
+    background-color: #28a745;
+}
+
+button[type="button"] {
+    background-color: #28a745;
 }
 
 button:hover {
-    background-color: #2980b9;
+    opacity: 0.9;
 }
 
-/* Botón "Vaciar" */
-#vaciar {
-    background-color: #e74c3c;
+.btn-regresar {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    display: inline-block;
+    text-align: center;
+    transition: background-color 0.3s ease;
 }
 
-#vaciar:hover {
-    background-color: #c0392b;
+.btn-regresar:hover {
+    background-color: #28a745;
+    opacity: 0.9;
 }
 
-/* Imagen del material */
-.image-preview {
-    display: block;
-    margin: 10px auto;
-    max-width: 100%;
-    border-radius: 4px;
-    height: auto; /* Se ajusta automáticamente */
-}
 
-/* Adaptabilidad */
 @media (max-width: 600px) {
-    form {
-        padding: 15px;
+    .button-container {
+        flex-direction: column;
+        align-items: center;
     }
+
     button {
-        width: 100%;
-        margin-bottom: 10px;
+        width: 100%; /* Los botones ocuparán todo el ancho en pantallas pequeñas */
     }
 }

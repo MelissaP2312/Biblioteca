@@ -3,40 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Libros</title>
     <link rel="stylesheet" href="{{ asset('css/estiloslibrosregistro.css') }}">
     <style>
-        /* Estilo para el botón deshabilitado */
-        button:disabled {
-            opacity: 0.5;  /* Hace el botón semi-transparente */
-            cursor: not-allowed;  /* Cambia el cursor a un icono de no permitido */
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
         }
 
-        /* Estilo para el mensaje de éxito */
-        #success-message {
-            display: none; /* Inicialmente oculto */
-            background-color: #4CAF50;
-            color: white;
-            padding: 15px;
+        h1 {
+            color: #333;
             text-align: center;
-            border-radius: 5px;
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1000;
-            width: 300px;
+            margin-bottom: 20px;
+            font-size: 32px;
         }
 
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #80bdff;
+            outline: none;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        button, .btn-regresar {
+            padding: 10px 20px;
+            font-size: 14px;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        button[type="submit"] {
+            background-color: #28a745;
+        }
+
+        button[type="button"], .btn-regresar {
+            background-color: #28a745;
+        }
+
+        button:hover, .btn-regresar:hover {
+            opacity: 0.9;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-regresar {
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .btn-regresar:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 600px) {
+            .button-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            button, .btn-regresar {
+                width: 100%;
+            }
+        }
     </style>
-    <title>Registro de Libros</title>
-
-    <!-- Mensaje de éxito -->
-    @if(session('success'))
-        <div id="success-message">
-            {{ session('success') }}
-        </div>
-    @endif
-
 </head>
 <body>
     <h1>Registrar un Libro</h1>
@@ -61,19 +137,17 @@
 
             <label for="isbn">ISBN:</label>
             <input type="text" id="isbn" name="isbn" required value="{{ old('isbn') }}">
-            <div id="isbn-error" style="color: red; display: none;">El ISBN ya está registrado.</div> 
-            <div id="isbn-incomplete" style="color: red; display: none;">El ISBN debe tener al menos 13 dígitos.</div>        
+            <div id="isbn-error" style="color: red; display: none;">El ISBN ya está registrado.</div>
+            <div id="isbn-incomplete" style="color: red; display: none;">El ISBN debe tener al menos 13 dígitos.</div>
 
             <label for="unidades">Unidades Disponibles:</label>
             <input type="number" id="unidades" name="unidades" min="1" required value="{{ old('unidades') }}">
 
-            <div class="button-container">
+            <div class="button-container centered">
                 <button type="submit" id="saveButton" disabled>Guardar</button>
                 <button type="button" onclick="clearForm()">Limpiar</button>
+                <a href="{{ route('libros.index') }}" class="btn-regresar">Ver Libros Registrados</a>
             </div>
-
-            <button type="button" onclick="window.location.href='{{ route('libros.index') }}'">Ver Libros Registrados</button>
-
         </form>
 
         @if($errors->any())
@@ -85,28 +159,22 @@
         @endif
     </div>
 
-        <!-- Botón para regresar a la vista del administrador -->
-    <div class="button-container">
-        <a href="{{ url('/admin/registro') }}" class="btn-regresar">Regresar al Adminis trador</a>
+    <div class="button-container centered">
+        <a href="{{ url('/admin/registro') }}" class="btn-regresar">Regresar al Administrador</a>
     </div>
 
     <script src="{{ asset('js/scriptregistrolibro.js') }}"></script>
     <script src="{{ asset('js/GuardadoyLimpiar.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
     <script>
-        // Mostrar el mensaje de éxito y ocultarlo después de 5 segundos
         $(document).ready(function() {
             if ($('#success-message').length > 0) {
                 $('#success-message').fadeIn().delay(5000).fadeOut();
             }
 
-            // Validación del campo ISBN (como antes, para deshabilitar el botón)
             $('#isbn').on('input', function() {
-                var isbn = $(this).val();
-                var saveButton = $('#saveButton');
-
-                // Validar longitud de ISBN
+                const isbn = $(this).val();
+                const saveButton = $('#saveButton');
                 if (isbn.length < 13) {
                     $('#isbn-incomplete').show();
                     $('#isbn-error').hide();
@@ -116,7 +184,7 @@
                     $.ajax({
                         url: '{{ route("libros.checkIsbn") }}',
                         method: 'GET',
-                        data: { isbn: isbn },
+                        data: { isbn },
                         success: function(response) {
                             if (response.exists) {
                                 $('#isbn-error').show();
@@ -130,56 +198,11 @@
                 }
             });
         });
-    </script>
-    <script>
-        
-    // Función para manejar el almacenamiento offline
-    document.addEventListener("DOMContentLoaded", function() {
-            // Verificar si el usuario está offline
-            if (!navigator.onLine) {
-                // Verifica si ya tenemos datos guardados en localStorage
-                const savedData = localStorage.getItem('formLibro');
-                if (savedData) {
-                    const formData = JSON.parse(savedData);
-                    // Rellena el formulario con los datos guardados
-                    document.getElementById('nombre').value = formData.nombre || '';
-                    document.getElementById('autor').value = formData.autor || '';
-                    document.getElementById('genero').value = formData.genero || '';
-                    document.getElementById('descripcion').value = formData.descripcion || '';
-                    document.getElementById('isbn').value = formData.isbn || '';
-                    document.getElementById('unidades').value = formData.unidades || '';
-                }
-            }
 
-            // Guardar los datos en localStorage cuando el formulario cambia
-            document.getElementById('formLibro').addEventListener('input', function() {
-                if (!navigator.onLine) {
-                    const formData = {
-                        nombre: document.getElementById('nombre').value,
-                        autor: document.getElementById('autor').value,
-                        genero: document.getElementById('genero').value,
-                        descripcion: document.getElementById('descripcion').value,
-                        isbn: document.getElementById('isbn').value,
-                        unidades: document.getElementById('unidades').value,
-                    };
-                    localStorage.setItem('formLibro', JSON.stringify(formData));
-                }
-            });
-        });
-
-        // Función para vaciar el formulario y eliminar los datos guardados en localStorage
         function clearForm() {
+            document.getElementById('formLibro').reset();
             localStorage.removeItem('formLibro');
-            document.getElementById('nombre').value = '';
-            document.getElementById('autor').value = '';
-            document.getElementById('genero').value = '';
-            document.getElementById('descripcion').value = '';
-            document.getElementById('isbn').value = '';
-            document.getElementById('unidades').value = '';
         }
     </script>
-    
-
-
 </body>
 </html>

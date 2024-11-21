@@ -1,14 +1,83 @@
-<!-- resources/views/rentasAulas.blade.php -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Rentas de Aulas</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 32px;
+        }
+
+        /* Estilo de la tabla */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        thead {
+            background-color: #007bff;
+            color: white;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 10px 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            font-size: 16px;
+            text-transform: uppercase;
+        }
+
+        tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Botón de regreso */
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .btn-regresar {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            display: inline-block;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-regresar:hover {
+            background-color: #0056b3;
+            opacity: 0.9;
+        }
+    </style>
 </head>
 <body>
     <h1>Lista de Rentas de Aulas</h1>
-    <table border="1">
+    <table>
         <thead>
             <tr>
                 <th>Nombre del Aula</th>
@@ -20,11 +89,15 @@
             @foreach ($rentas as $renta)
                 <tr>
                     <td>{{ $renta->nombre_aula }}</td>
-                    <td>{{ $renta->usuario->nombre }}</td> <!-- Asumiendo que el modelo User tiene un atributo 'name' -->
+                    <td>{{ $renta->usuario->nombre }}</td>
                     <td>{{ $renta->fecha_prestamo }}</td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+
+    <div class="button-container">
+        <a href="{{ url('/admin/rentas') }}" class="btn-regresar">Regresar al Admin</a>
+    </div>
 </body>
 </html>

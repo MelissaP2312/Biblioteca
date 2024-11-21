@@ -60,7 +60,6 @@
     </nav>
     
     <div class="main-container">
-        <h2 class="section-title">Libros Disponibles</h2>
         <div class="libros-list" id="libros-list">
             @foreach($libros as $libro)
             <div class="libro-card" data-genero="{{ $libro->genero }}">
