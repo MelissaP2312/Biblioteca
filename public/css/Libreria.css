@@ -1,3 +1,48 @@
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-trigger {
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+    padding: 10px;
+}
+
+.dropdown-content,
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    z-index: 1000;
+    min-width: 120px;
+}
+
+.dropdown-content a,
+.dropdown-menu a {
+    display: block;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.dropdown-content a:hover,
+.dropdown-menu a:hover {
+    background-color: #f0f0f0;
+}
+
+/* Mostrar el menú solo cuando se pasa el cursor por el disparador */
+.dropdown:hover .dropdown-content,
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
 /* Botón de descripción */
 .btn-description {
     display: inline-block;

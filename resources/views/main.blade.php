@@ -32,28 +32,49 @@
 
     <nav>
         <a href="#">Inicio</a>
-        <a href="#">Filtros</a>
+        <div class="dropdown">
+            <span class="dropdown-trigger">Filtros</span>
+            <div class="dropdown-content">
+                <a href="#" class="filter-option" data-genero="none">Eliminar Filtro</a>
+                @foreach($generos as $genero)
+                    <a href="#" class="filter-option" data-genero="{{ $genero->genero }}">{{ $genero->genero }}</a>
+                @endforeach
+            </div>
+        </div>        
         <a href="#">Membresía</a>
-        <a href="#">Renta</a>
+        <a href="{{ route('rentas.create') }}">Renta</a>
         <a href="{{ url('/foros') }}">Foros</a>
-        <a href="{{ route('login') }}" class="btn-login">Iniciar sesión</a>
+        @if(Auth::check())
+        <div class="dropdown">
+            <span class="dropdown-trigger">Hola, {{ Auth::user()->nombre }}</span>
+            <div class="dropdown-menu">
+                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cerrar sesión</a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            </div>
+        </div>
+        @else
+            <a href="{{ route('login') }}" class="btn-login">Iniciar sesión</a>
+        @endif
     </nav>
-
+    
     <div class="main-container">
         <h2 class="section-title">Libros Disponibles</h2>
-        <div class="libros-list">
+        <div class="libros-list" id="libros-list">
             @foreach($libros as $libro)
-            <div class="libro-card">
+            <div class="libro-card" data-genero="{{ $libro->genero }}">
                 <img src="{{ $libro->imagen ? 'data:image/jpeg;base64,' . base64_encode($libro->imagen) : asset('images/default-book-image.jpg') }}" alt="{{ $libro->nombre }}">
                 <div class="card-content">
                     <h3>{{ $libro->nombre }}</h3>
                     <p><strong>Autor:</strong> {{ $libro->autor }}</p>
+                    <p><strong>Género:</strong> {{ $libro->genero }}</p>
                     <a href="{{ route('libros.show', ['id' => $libro->id]) }}" class="btn-description">Ver descripción</a>
                 </div>
             </div>
             @endforeach
         </div>
-    </div>
+    </div>    
 
     <div class="main-container">
         <h2 class="section-title">Libros Mejor Calificados</h2>
@@ -79,5 +100,30 @@
         </div>
     </footer>      
     <script src="{{ asset('js/scriptfooterHorayFecha.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const filterOptions = document.querySelectorAll('.filter-option');
+    
+            filterOptions.forEach(option => {
+                option.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const genero = this.getAttribute('data-genero');
+                    const url = new URL(window.location.href);
+    
+                    if (genero === "none") {
+                        // Eliminar todos los filtros
+                        url.searchParams.delete('genero');
+                    } else if (genero) {
+                        // Aplicar un filtro específico
+                        url.searchParams.set('genero', genero);
+                    }
+    
+                    // Recargar la página con los filtros actualizados
+                    window.location.href = url.toString();
+                });
+            });
+        });
+    </script>
+      
 </body>
 </html>

@@ -15,25 +15,24 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        // Validar los datos del formulario
         $request->validate([
             'email' => 'required|email',
             'password' => 'required|string',
         ]);
 
-        // Intentar autenticar al usuario
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            // Autenticación exitosa
-            return redirect()->intended('/')->with('success', 'Has iniciado sesión correctamente');
+            $user = Auth::user();
+            return redirect()->intended('/')
+                ->with('success', "Bienvenido de nuevo, {$user->name}!");
         }
 
-        // Si la autenticación falla, redirigir de nuevo con un mensaje de error
         return redirect()->back()->with('error', 'Las credenciales son incorrectas')->withInput($request->only('email'));
     }
 
     public function logout(Request $request)
     {
         Auth::logout();
-        return redirect('/login')->with('success', 'Has cerrado sesión correctamente');
+        return redirect('/')->with('success', 'Has cerrado sesión correctamente');
     }
+
 }

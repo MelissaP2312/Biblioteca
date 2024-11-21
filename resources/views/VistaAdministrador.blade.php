@@ -15,7 +15,7 @@
                 <div class="buttons">
                     <a href="{{ url('admin/registro') }}" class="button">Registro</a>
                     <a href="{{ url('admin/rentas') }}" class="button">Rentas</a>
-                    <a href="{{ url('admin/devolucion') }}" class="button">Devolución</a>
+                    <a href="{{ url('admin/devolucion') }}" class="button">Devolver</a>
                     <a href="{{ url('admin/foros') }}" class="button">Foros</a>
                 </div>
             </div>

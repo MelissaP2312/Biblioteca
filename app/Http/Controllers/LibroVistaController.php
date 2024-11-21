@@ -8,18 +8,26 @@ use Illuminate\Http\Request;
 class LibroVistaController extends Controller
 {
     // Método para mostrar la vista principal con los libros
-    public function index()
-    {
-        $libros = Libro::all();
+    public function index(Request $request)
+{
+    // Obtener los géneros disponibles para el filtro
+    $generos = Libro::select('genero')->distinct()->get();
 
-        // Libros destacados ordenados por el promedio de puntuación
-        $librosDestacados = Libro::with('calificaciones')
-            ->get()
-            ->sortByDesc(fn($libro) => $libro->promedioRanking())
-            ->take(10);
+    // Filtrar los libros por género si se proporciona uno
+    $filtroGenero = $request->input('genero');
+    $libros = Libro::when($filtroGenero, function ($query, $genero) {
+        return $query->where('genero', $genero);
+    })->get();
 
-        return view('main', compact('libros', 'librosDestacados'));
-    }
+    // Obtener los libros destacados
+    $librosDestacados = Libro::with('calificaciones')
+        ->get()
+        ->sortByDesc(fn($libro) => $libro->promedioRanking())
+        ->take(10);
+
+    return view('main', compact('libros', 'librosDestacados', 'generos'));
+}
+
 
 
 

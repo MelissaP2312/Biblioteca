@@ -12,6 +12,11 @@ use App\Http\Controllers\RentaAulaController;
 use App\Http\Controllers\RentaMaterialController;
 use App\Http\Controllers\Auth\LoginEmpleadoController;
 use App\Http\Controllers\Auth\RegisterEmpleadoController;
+use App\Http\Controllers\RentasPrincipalController;
+
+// Rutas para renta de libros desde la pantalla principal
+Route::get('/rentas', [RentasPrincipalController::class, 'create'])->name('rentas.create'); // Formulario de renta
+Route::post('/rentas', [RentasPrincipalController::class, 'store'])->name('rentas.store'); // Guardar renta
 
 // Rutas para registro aulas
 Route::get('/admin/registro/aulas', [AulaController::class, 'create'])->name('aula.create'); 
