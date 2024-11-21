@@ -14,6 +14,9 @@ use App\Http\Controllers\Auth\LoginEmpleadoController;
 use App\Http\Controllers\Auth\RegisterEmpleadoController;
 use App\Http\Controllers\RentasPrincipalController;
 use App\Http\Controllers\MembresiaController;
+use App\Http\Controllers\AdminForoController;
+use App\Http\Controllers\TemaController;
+use App\Http\Controllers\UsuarioController;
 
 // Rutas para renta de libros desde la pantalla principal
 Route::get('/rentas', [RentasPrincipalController::class, 'create'])->name('rentas.create'); // Formulario de renta
@@ -78,7 +81,6 @@ Route::view('/foros', 'Foros')->name('foros');
 Route::view('/membresias', 'membresias')->name('membresias');
 Route::view('/admin', 'VistaAdministrador')->name('admin.dashboard');
 Route::view('/admin/rentas', 'VR3')->name('admin.rent');
-Route::view('/admin/foros', 'VR4')->name('admin.foro');
 Route::view('/admin/registro', 'VR2')->name('admin.register');
 Route::view('contraseña', 'recuperaContraseña')->name('password.reset');
 Route::view('/admin/devolucion', 'VR5')->name('admin.devolution');
@@ -87,6 +89,28 @@ Route::get('libros/imagen/{id}', [LibroVistaController::class, 'getImagen'])->na
 Route::get('/libros/{id}', [LibroVistaController::class, 'show'])->name('libros.show');
 Route::post('/libros/{id}/ranking', [LibroVistaController::class, 'updateRanking'])->name('libros.updateRanking');
 Route::post('/libros/{id}/calificacion', [LibroVistaController::class, 'addCalificacion'])->name('libros.addCalificacion');
+
+// Rutas para los foros del administrador
+Route::get('/admin/foros', [AdminForoController::class, 'index'])->name('foroShow'); // Listar foros
+Route::get('/admin/foros/create', [AdminForoController::class, 'create'])->name('foros.create'); // Crear foro
+Route::post('/admin/foros', [AdminForoController::class, 'store'])->name('foros.store'); // Guardar foro
+Route::get('/admin/foros/{id}', [AdminForoController::class, 'show'])->name('foros.show'); // Ver foro
+Route::get('/admin/foros/{id}/edit', [AdminForoController::class, 'edit'])->name('foros.edit'); // Editar foro
+Route::put('/admin/foros/{id}', [AdminForoController::class, 'update'])->name('foros.update'); // Actualizar foro
+Route::delete('/admin/foros/{id}', [AdminForoController::class, 'destroy'])->name('foros.destroy'); // Eliminar foro
+
+// Rutas para los temas
+Route::prefix('temas')->name('temas.')->group(function () {
+    Route::get('create', [TemaController::class, 'create'])->name('create');
+    Route::post('store', [TemaController::class, 'store'])->name('store');
+    Route::get('/', [TemaController::class, 'index'])->name('index');
+    Route::get('edit/{id}', [TemaController::class, 'edit'])->name('edit');
+    Route::put('update/{id}', [TemaController::class, 'update'])->name('update');
+    Route::delete('destroy/{id}', [TemaController::class, 'destroy'])->name('destroy');
+});
+
+//Rutas para usuarios
+Route::resource('usuarios', UsuarioController::class);
 
 Route::get('/membresia', [MembresiaController::class, 'index'])
     ->name('membresia.index')
