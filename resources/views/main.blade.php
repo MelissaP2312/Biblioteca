@@ -31,10 +31,6 @@
     </header>
 
     <nav>
-        <a href="#">Inicio</a>
-        <a href="#">Filtros</a>
-        <a href="{{ url('/membresias') }}">Membresía</a>
-        <a href="#">Renta</a>
         <a href="{{ route('main') }}">Inicio</a>
         <div class="dropdown">
             <span class="dropdown-trigger">Filtros</span>
@@ -45,7 +41,7 @@
                 @endforeach
             </div>
         </div>        
-        <a href="{{ route('membresia.index') }}">Membresía</a>
+        <a href="{{ url('/membresias') }}">Membresía</a>
         <a href="{{ route('rentas.create') }}">Renta</a>
         <a href="{{ url('/foros') }}">Foros</a>
         @if(Auth::check())
