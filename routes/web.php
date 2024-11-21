@@ -13,6 +13,7 @@ use App\Http\Controllers\RentaMaterialController;
 use App\Http\Controllers\Auth\LoginEmpleadoController;
 use App\Http\Controllers\Auth\RegisterEmpleadoController;
 use App\Http\Controllers\RentasPrincipalController;
+use App\Http\Controllers\MembresiaController;
 
 // Rutas para renta de libros desde la pantalla principal
 Route::get('/rentas', [RentasPrincipalController::class, 'create'])->name('rentas.create'); // Formulario de renta
@@ -87,3 +88,6 @@ Route::get('/libros/{id}', [LibroVistaController::class, 'show'])->name('libros.
 Route::post('/libros/{id}/ranking', [LibroVistaController::class, 'updateRanking'])->name('libros.updateRanking');
 Route::post('/libros/{id}/calificacion', [LibroVistaController::class, 'addCalificacion'])->name('libros.addCalificacion');
 
+Route::get('/membresia', [MembresiaController::class, 'index'])
+    ->name('membresia.index')
+    ->middleware('auth');

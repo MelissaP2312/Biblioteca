@@ -24,4 +24,9 @@ class RentaLibro extends Model
     {
         return $this->belongsTo(User::class, 'usuario_id');
     }
+
+    public function libro()
+    {
+        return $this->belongsTo(Libro::class, 'nombre_libro', 'nombre');
+    }
 }
