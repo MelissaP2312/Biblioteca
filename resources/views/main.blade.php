@@ -41,7 +41,7 @@
                 @endforeach
             </div>
         </div>        
-        <a href="{{ route('membresia.index') }}">Membresía</a>
+        <a href="{{ url('/membresias') }}">Membresía</a>
         <a href="{{ route('rentas.create') }}">Renta</a>
         <a href="{{ url('/foros') }}">Foros</a>
         @if(Auth::check())

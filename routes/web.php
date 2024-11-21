@@ -75,13 +75,13 @@ Route::post('/register/empleado', [RegisterEmpleadoController::class, 'register'
 // Rutas de vistas generales
 Route::view('/', 'main')->name('home');
 Route::view('/foros', 'Foros')->name('foros');
+Route::view('/membresias', 'membresias')->name('membresias');
 Route::view('/admin', 'VistaAdministrador')->name('admin.dashboard');
 Route::view('/admin/rentas', 'VR3')->name('admin.rent');
 Route::view('/admin/foros', 'VR4')->name('admin.foro');
 Route::view('/admin/registro', 'VR2')->name('admin.register');
 Route::view('contraseña', 'recuperaContraseña')->name('password.reset');
 Route::view('/admin/devolucion', 'VR5')->name('admin.devolution');
-
 Route::get('/', [LibroVistaController::class, 'index'])->name('main');
 Route::get('libros/imagen/{id}', [LibroVistaController::class, 'getImagen'])->name('libros.imagen');
 Route::get('/libros/{id}', [LibroVistaController::class, 'show'])->name('libros.show');
