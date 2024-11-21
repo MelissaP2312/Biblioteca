@@ -88,6 +88,4 @@ Route::get('/libros/{id}', [LibroVistaController::class, 'show'])->name('libros.
 Route::post('/libros/{id}/ranking', [LibroVistaController::class, 'updateRanking'])->name('libros.updateRanking');
 Route::post('/libros/{id}/calificacion', [LibroVistaController::class, 'addCalificacion'])->name('libros.addCalificacion');
 
-Route::get('/membresia', [MembresiaController::class, 'index'])
-    ->name('membresia.index')
-    ->middleware('auth');
+Route::get('/membresia', [MembresiaController::class, 'index'])->name('membresia.index');
