@@ -33,7 +33,7 @@
     <nav>
         <a href="#">Inicio</a>
         <a href="#">Filtros</a>
-        <a href="#">Membresía</a>
+        <a href="{{ url('/membresias') }}">Membresía</a>
         <a href="#">Renta</a>
         <a href="{{ url('/foros') }}">Foros</a>
         <a href="{{ route('login') }}" class="btn-login">Iniciar sesión</a>
